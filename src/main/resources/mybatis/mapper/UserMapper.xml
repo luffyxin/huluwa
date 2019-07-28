@@ -1,0 +1,23 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huluwa.mapper.UserMapper">
+
+    <sql id="baseUserField">
+		id,name,nick_name as nickName,password,mobile,permission
+	</sql>
+
+    <insert id="register">
+		INSERT
+		INTO huluwa.t_user(name,nick_name,password,mobile,permission)
+		VALUES (#{user.name},#{user.nickName},#{user.password},#{user.mobile},#{user.permission})
+	</insert>
+
+    <select id="getUserByName" resultType="com.huluwa.model.entity.User">
+        SELECT
+        <include refid="baseUserField"/>
+        FROM huluwa.t_user
+        WHERE name = #{name}
+    </select>
+
+</mapper>
